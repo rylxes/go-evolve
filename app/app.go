@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-postgres/controllers/books"
 	"go-postgres/domain"
+	"os"
 )
 
 var (
@@ -15,5 +16,6 @@ func StartApp() {
 	h := books.New(DB)
 
 	router.GET("/books/find", h.FindBook)
-	router.Run(":8080")
+	port := os.Getenv("PORT")
+	router.Run(":" + port)
 }
