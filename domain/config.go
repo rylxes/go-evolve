@@ -3,10 +3,12 @@ package domain
 import (
 	"fmt"
 	"github.com/bxcodec/faker/v3"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
+	"os"
 )
 
 const (
@@ -18,8 +20,14 @@ const (
 )
 
 func Init() *gorm.DB {
-	dbURL := fmt.Sprintf("postgres://%s:%s@%s:%d/%s", user, password, host, port, dbname)
-	//dbURL := "postgres://pg:pass@localhost:5432/crud"
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	dbURL := os.Getenv("DATABASE_URL")
+	//dbURL := fmt.Sprintf("postgres://%s:%s@%s:%d/%s", user, password, host, port, dbname)
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
 	if err != nil {
