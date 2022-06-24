@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-postgres/controllers/users"
+	"go-postgres/controllers/books"
 	"go-postgres/domain"
 )
 
@@ -12,8 +12,8 @@ var (
 
 func StartApp() {
 	DB := domain.Init()
-	h := users.New(DB)
+	h := books.New(DB)
 
-	router.GET("/books/find", h.FindUser)
+	router.GET("/books/find", h.FindBook)
 	router.Run(":8080")
 }
