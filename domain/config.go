@@ -1,8 +1,6 @@
 package domain
 
 import (
-	"fmt"
-	"github.com/bxcodec/faker/v3"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
@@ -39,15 +37,15 @@ func Init() *gorm.DB {
 		return nil
 	}
 
-	a := [20]Book{}
-	err3 := faker.FakeData(&a)
-	if err3 != nil {
-		fmt.Println(err3)
-	}
-	for _, v := range a {
-		db.Create(&v)
-	}
-	fmt.Printf("%+v", a)
+	//a := [20]Book{}
+	//err3 := faker.FakeData(&a)
+	//if err3 != nil {
+	//	fmt.Println(err3)
+	//}
+	//for _, v := range a {
+	//	db.Create(&v)
+	//}
+	//fmt.Printf("%+v", a)
 
 	return db
 }
